@@ -5,6 +5,7 @@ let newArray = [];
 let prdImage;
 let prdPrice;
 let prdName;
+/*Add items to array */
 function addcart(strNo) {
 
     let newStrno = strNo;
@@ -65,7 +66,7 @@ function addcart(strNo) {
 let retrievedData = localStorage.getItem("Product");
 let prdDetails = JSON.parse(retrievedData);
 document.getElementById("tableBody").addEventListener("load", displayTable())
-
+/*To display in the Cart-table */
 function displayTable() {
     let allRows = [];
 
@@ -91,6 +92,7 @@ function displayTable() {
 
     document.getElementById("tableBody").innerHTML = allRows.join(' ');
 }
+/*Item total*/
 function totalcart() {
 
     let count = 0;
@@ -108,7 +110,7 @@ function totalcart() {
 
 
 }
-
+/*Quantity change */
 function changeTxt(element, priceValue) {
     let txtValue = element.value;
     element.closest("tr").querySelector("td > .prdPriceC").innerHTML = txtValue * priceValue
@@ -116,6 +118,7 @@ function changeTxt(element, priceValue) {
 
 
 }
+
 function getTotalPrice() {
     var TotalValue = 0;
     let tbl = document.getElementById("PrdTable");
@@ -125,6 +128,7 @@ function getTotalPrice() {
     document.getElementById("CartTotal").innerHTML = '$' + TotalValue;
 
 }
+/*Delete item in the cart */
 function deleteItem(r) {
     let row = r.parentNode.parentNode.rowIndex;
     let prdRow = row - 1;
