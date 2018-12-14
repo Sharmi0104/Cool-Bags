@@ -15,7 +15,7 @@ function addcart(strNo) {
         product_Image: null,
     };
 
-    let PrdId = 0;
+    
     if (newStrno == 1) {
         prdImage = document.getElementById('img1').src;
         prdPrice = document.getElementById('price1').innerHTML;
@@ -23,7 +23,7 @@ function addcart(strNo) {
         newProduct.product_Image = prdImage;
         newProduct.product_price = parseInt(prdPrice);
         newProduct.product_name = prdName;
-        //productArr.push(newProduct);
+        
 
 
     }
@@ -34,7 +34,7 @@ function addcart(strNo) {
         newProduct.product_Image = prdImage;
         newProduct.product_price = parseInt(prdPrice);
         newProduct.product_name = prdName;
-        //productArr.push(newProduct);
+        
     }
     else if (newStrno == 3) {
         prdImage = document.getElementById('img3').src;
@@ -43,7 +43,7 @@ function addcart(strNo) {
         newProduct.product_Image = prdImage;
         newProduct.product_price = parseInt(prdPrice);
         newProduct.product_name = prdName;
-        //productArr.push(newProduct);
+        
 
     }
     else if (newStrno == 4) {
@@ -53,12 +53,12 @@ function addcart(strNo) {
         newProduct.product_Image = prdImage;
         newProduct.product_price = parseInt(prdPrice);
         newProduct.product_name = prdName;
-        
+
     }
     productArr.push(newProduct);
 
     localStorage.setItem("Product", JSON.stringify(productArr));
-    if(productArr.length > 0){
+    if (productArr.length > 0) {
         alert('Items added in the cart')
     }
 }
@@ -68,11 +68,11 @@ document.getElementById("tableBody").addEventListener("load", displayTable())
 
 function displayTable() {
     let allRows = [];
-   
-   
-        for (let i = 0; i < prdDetails.length; i++) {
 
-            let row = `<tr><td class="cart_product"><img class="cart_img" src="${prdDetails[i].product_Image}" alt="" /></td>
+
+    for (let i = 0; i < prdDetails.length; i++) {
+
+        let row = `<tr><td class="cart_product"><img class="cart_img" src="${prdDetails[i].product_Image}" alt="" /></td>
         <td class="cart_description"><h4>${prdDetails[i].product_name}</h4></td>
         <td>$<span id="prdPrice" class="prdPriceC">${prdDetails[i].product_price}</span></td>
         <td>
@@ -83,31 +83,30 @@ function displayTable() {
         </td>   
         <td></td>     
         </tr>`
-            allRows.push(row);
-            totalcart();
-            //getTotalPrice();
-        }
-    
-   
+        allRows.push(row);
 
-    //append all rows to page
+    }
+
+    totalcart();
 
     document.getElementById("tableBody").innerHTML = allRows.join(' ');
-
-
-    
-
 }
-function totalcart() {       
-        
-let count=0;
-prdDetails.forEach(element => {
-    
-           count =count + element.product_price;
-});
+function totalcart() {
 
-document.getElementById("CartTotal").innerHTML = '$' + count;
-  
+    let count = 0;
+    prdDetails.forEach(element => {
+
+        count = count + element.product_price;
+    });
+    if (prdDetails.length == 0) {
+        document.getElementById("CartTotal").innerHTML = '$' + 0;
+
+    }
+    else {
+        document.getElementById("CartTotal").innerHTML = '$' + count;
+    }
+
+
 }
 
 function changeTxt(element, priceValue) {
@@ -119,7 +118,6 @@ function changeTxt(element, priceValue) {
 }
 function getTotalPrice() {
     var TotalValue = 0;
-    console.log('hi')
     let tbl = document.getElementById("PrdTable");
     for (let i = 1; tbl.rows[i]; i++) {
         TotalValue += parseInt(tbl.rows[i].querySelector("td > .prdPriceC").innerHTML);
@@ -134,9 +132,9 @@ function deleteItem(r) {
         prdDetails.splice(prdRow, 1)
         localStorage.setItem("Product", JSON.stringify(prdDetails));
         retrievedData = localStorage.getItem("Product");
-        prdDetails = JSON.parse(retrievedData);        
+        prdDetails = JSON.parse(retrievedData);
         displayTable();
-        
+
     }
 
 }
