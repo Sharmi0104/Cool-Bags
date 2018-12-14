@@ -9,4 +9,4 @@ E-shopper site(Basic)
 * css: main.css
 
 * Used bootstrap for template design.
-* create own logo.
+* created own logo.
